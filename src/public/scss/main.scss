@@ -1,7 +1,6 @@
-$icon-font-path: '../fonts/';
-
-// bower:scss
-@import "../components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
-// endbower
 
 // Style imports - Import All Required SCSS files Here
+p {
+    color: green;
+    display: flex;
+}
