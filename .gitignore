@@ -1,0 +1,7 @@
+# **********************************
+#  GIT IGNORE FILE
+# **********************************
+
+dist/
+node_modules/
+src/public/components/
