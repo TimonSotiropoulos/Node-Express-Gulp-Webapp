@@ -5,3 +5,4 @@
 dist/
 node_modules/
 src/public/components/
+.sass-cache/
