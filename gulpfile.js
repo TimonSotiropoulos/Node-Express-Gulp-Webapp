@@ -14,15 +14,20 @@ var gulp = require('gulp'),
   htmlmin = require('gulp-htmlmin'),
   pngquant = require('imagemin-pngquant'),
   cssmin = require('gulp-minify-css'),
-  runSequence = require('run-sequence');
+  runSequence = require('run-sequence'),
+  browserify = require('browserify'),
+  babelify = require('babelify'),
+  source = require('vinyl-source-stream');
 
 // Watch React Files
-gulp.task('watch-jsx', function () {
-    return gulp.src('src/public/scripts/**/*.jsx')
-      .pipe(plumber())
-      .pipe(react())
-      .pipe(gulp.dest('src/public/scripts/'));
+gulp.task('compile', function(){
+  browserify({entries: './src/app/bundle.js', extensions: ['.js', '.jsx'], debug: true})
+    .transform(babelify)
+    .bundle()
+    .pipe(source('main.js'))
+    .pipe(gulp.dest('./src/public/scripts'));
 });
+
 
 // Watch Scss Giles
 gulp.task('watch-sass', function () {
@@ -54,8 +59,8 @@ gulp.task('watch-bower', function () {
 
 gulp.task('watch', function() {
   gulp.watch('src/public/scss/**/*.scss', ['watch-sass']);
-  gulp.watch('src/bower.json', ['watch-bower']);
-  // gulp.watch('src/public/scripts/**/*.jsx', ['watch-jsx']);
+  // gulp.watch('src/bower.json', ['watch-bower']);
+  gulp.watch('src/app/**/*.jsx', ['compile']);
 
 });
 
@@ -81,7 +86,7 @@ gulp.task('dist', function () {
 
 gulp.task('default', [
   'watch-sass',
-  // 'watch-jsx',
+  'compile',
   // 'watch-bower',
   'develop',
   'watch'
