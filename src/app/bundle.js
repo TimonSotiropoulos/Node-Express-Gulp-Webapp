@@ -4,4 +4,4 @@ import Main from './components/Main.jsx';
 
 var mountNode = document.getElementById('mount-node-id');
 
-React.render(<Main />, mountNode);
+React.render(<Main name="Timon" />, mountNode);
