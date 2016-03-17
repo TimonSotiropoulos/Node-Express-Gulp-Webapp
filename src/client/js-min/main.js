@@ -1,0 +1,1 @@
+console.log("a different log msg from main.js");
